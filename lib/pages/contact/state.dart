@@ -5,5 +5,5 @@ import '../../model/user_model.dart';
 class ContactState{
 RxInt count = 0.obs;
 
-RxList<UserData> contactList = <UserData>[].obs;
+// RxList<UserData> contactList = <UserData>[].obs;
 }

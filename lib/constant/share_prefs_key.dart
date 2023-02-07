@@ -1,0 +1,1 @@
+const STORAGE_IS_FIRST_OPEN = 'is_first_open';
