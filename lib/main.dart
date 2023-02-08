@@ -7,12 +7,14 @@ import 'package:talky/configuration_store.dart';
 import 'package:talky/firebase_options.dart';
 import 'package:talky/routes/pages.dart';
 import 'package:talky/storage_service.dart';
+import 'package:talky/user-store.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Get.putAsync<StorageService>(()=>StorageService().init());
   Get.put<ConfigurationStore>(ConfigurationStore());
+  Get.put<UserStore>(UserStore());
 
 
 

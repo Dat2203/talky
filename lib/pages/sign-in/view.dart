@@ -55,7 +55,9 @@ class SignInPage extends GetView<SignInController> {
       child: Column(
         children: [
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              controller.handleSignIn();
+            },
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.deepPurpleAccent,
             ),
