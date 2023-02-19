@@ -5,6 +5,6 @@ import 'package:talky/pages/contact/controller.dart';
 class ContactBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => ContactController());
+    Get.lazyPut(()=>ContactController());
   }
 }
