@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:talky/pages/camera.dart';
 import 'package:talky/pages/contact/index.dart';
 import 'package:talky/pages/notification.dart';
 
@@ -15,7 +16,7 @@ class ApplicationPage extends GetView<ApplicationController> {
       children: [
         Center(child: Text("chat"),),
         Center(child: ContactPage()),
-        Center(child: NotificationScreen(),),
+        Center(child: CameraScrenn(),),
       ],
     );
   }

@@ -62,50 +62,6 @@ class ContactController extends GetxController {
     // });
   }
 
-  void dsa()async{
-    print('run in here');
-
-    FirebaseMessaging  messaging = FirebaseMessaging.instance;
-    // 3. On iOS, this helps to take the user permissions
-    NotificationSettings settings = await messaging.requestPermission(
-      alert: true,
-      badge: true,
-      provisional: false,
-      sound: true,
-    );
-
-    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-
-    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      print('User granted permission');
-      FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-        print(" message--->  ");
-        print( message.notification?.title ?? "null");
-        // Parse the message received
-        PushNotification notification = PushNotification(
-          title: message.notification?.title,
-          body: message.notification?.body,
-        );
-        print("init notification");
-        _notificationInfor.value = notification;
-      });
-
-      if (_notificationInfor != null) {
-        // For displaying the notification as an overlay
-        showSimpleNotification(
-          Text( _notificationInfor.value.title ?? "") as Widget,
-          leading: NotificationBadge(totalNotifications: 1),
-          subtitle: Text(_notificationInfor.value.body ?? "") as Widget,
-          background: Colors.cyan.shade700,
-          duration: Duration(seconds: 2),
-        );
-      }else{
-        print("erros");
-      }
-    } else {
-      print('User declined or has not accepted permission');
-    }
-  }
 
   Future<String?> getFcmToken()async{
     String? fcmKey = await FirebaseMessaging.instance.getToken();
@@ -118,8 +74,6 @@ class ContactController extends GetxController {
     // TODO: implement onReady
     super.onReady();
     asyncLoadData();
-    dsa();
-    print("screen is ready");
   }
 
 
