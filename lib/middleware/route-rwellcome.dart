@@ -16,6 +16,7 @@ class RouteWellComeMiddleWare extends GetMiddleware{
 
    @override
    RouteSettings? redirect(String? route){
+     print(UserStore.to.isLogin);
      if(ConfigurationStore.to.isFirstOpen== false){
        return null;
      }else if(UserStore.to.isLogin){

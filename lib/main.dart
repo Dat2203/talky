@@ -6,6 +6,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:talky/configuration_store.dart';
 import 'package:talky/firebase_options.dart';
@@ -26,7 +27,14 @@ late final cameras ;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  //
+  // await JustAudioBackground.init(
+  //   androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
+  //   androidNotificationChannelName: 'Audio playback',
+  //   androidNotificationOngoing: true,
+  // );
 
+  //
   await Get.putAsync<StorageService>(() => StorageService().init());
   Get.put<ConfigurationStore>(ConfigurationStore());
   Get.put<UserStore>(UserStore());

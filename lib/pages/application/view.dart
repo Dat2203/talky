@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:talky/pages/Gellary.dart';
 import 'package:talky/pages/camera.dart';
 import 'package:talky/pages/contact/index.dart';
+import 'package:talky/pages/location-screen.dart';
 import 'package:talky/pages/notification.dart';
 
+import '../Audio.dart';
 import 'controller.dart';
 
 class ApplicationPage extends GetView<ApplicationController> {
@@ -15,8 +18,8 @@ class ApplicationPage extends GetView<ApplicationController> {
       onPageChanged: controller.handlePageChange,
       children: [
         Center(child: Text("chat"),),
-        Center(child: ContactPage()),
-        Center(child: CameraScrenn(),),
+        Center(child: AudioScreen()),
+        Center(child: LocationScreen()),
       ],
     );
   }

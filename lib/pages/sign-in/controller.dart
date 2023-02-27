@@ -40,7 +40,7 @@ class SignInController extends GetxController {
         userGoogleLogin.displayName = displayName;
         userGoogleLogin.accessToken = id;
 
-        UserStore.to.saveProfile(userGoogleLogin);
+
 
         var userbase = await db
             .collection("users")
@@ -70,6 +70,7 @@ class SignInController extends GetxController {
                       userdata.toFirestore())
               .add(data);
         }
+        UserStore.to.saveProfile(userGoogleLogin);
         print('Ok');
         Get.offAndToNamed(AppRoutes.APPLICATION);
       }

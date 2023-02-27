@@ -40,6 +40,11 @@ class ContactPage extends StatelessWidget {
              print("fmckey: "+ key!);
 
             }, child: Text("push notification")),
+            ElevatedButton(onPressed: ()async{
+              final String? key =await logic.getFcmToken();
+              print("fmckey: "+ key!);
+
+            }, child: Text("Play Audio")),
             NotificationBadge(totalNotifications: state.totlNotification),
             SizedBox(height: 16.0),
             // TODO: add the notification text here

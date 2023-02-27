@@ -22,7 +22,9 @@ class UserStore extends GetxController{
     // TODO: implement onInit
     super.onInit();
     token =StorageService.to.getString(STORAGE_USER_TOKEN_KEY);
+
     var profileOnline = StorageService.to.getString(STORAGE_USER_PROFILE_KEY);
+    _isLogin.value = profileOnline != null;
   }
 
   Future<void> saveProfile(UserGoogleLogin userGoogleLogin)async{
