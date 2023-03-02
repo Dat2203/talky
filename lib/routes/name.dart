@@ -17,4 +17,8 @@ class AppRoutes{
 
   static const Photoimeview = '/photoimaview';
 
+  static const OTPSIGNIN ='/otp_signup';
+
+  static const OTP_VERIFY ='/otp_verify';
+
 }

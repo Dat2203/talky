@@ -5,7 +5,9 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:talky/middleware/route-rwellcome.dart';
 import 'package:talky/pages/application/binding.dart';
+import 'package:talky/pages/sign-in/OTPScreen.dart';
 import 'package:talky/pages/sign-in/index.dart';
+import 'package:talky/pages/sign-in/signin-phonenumber.dart';
 import 'package:talky/pages/wellcome/binding.dart';
 
 import '../pages/application/view.dart';
@@ -36,6 +38,15 @@ class AppPages {
         name: AppRoutes.APPLICATION,
         page: () => ApplicationPage(),
         binding: ApplicationBinding()),
+
+    GetPage(
+        name: AppRoutes.OTPSIGNIN,
+        page: () => OTPVerifyPage(),
+        binding: SignInBinding()),
+    GetPage(
+        name: AppRoutes.OTP_VERIFY,
+        page: () => OTPScreen(),
+        binding: SignInBinding()),
 
 
     // GetPage

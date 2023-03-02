@@ -6,24 +6,22 @@ import 'package:talky/user-store.dart';
 
 import '../user-store.dart';
 
-class RouteWellComeMiddleWare extends GetMiddleware{
+class RouteWellComeMiddleWare extends GetMiddleware {
+  @override
+  int? priority = 0;
 
-   @override
-  int?  priority = 0;
+  RouteWellComeMiddleWare({this.priority});
 
-   RouteWellComeMiddleWare({this.priority});
-
-
-   @override
-   RouteSettings? redirect(String? route){
-     print(UserStore.to.isLogin);
-     if(ConfigurationStore.to.isFirstOpen== false){
-       return null;
-     }else if(UserStore.to.isLogin){
-       return RouteSettings(name: AppRoutes.APPLICATION);
-     }else{
-       return RouteSettings(name: AppRoutes.SIGN_IN);
-     }
-
-   }
+  @override
+  RouteSettings? redirect(String? route) {
+    print(UserStore.to.isLogin);
+    if (ConfigurationStore.to.isFirstOpen == false) {
+      return null;
+    }
+    if (UserStore.to.isLogin == true) {
+      return RouteSettings(name: AppRoutes.APPLICATION);
+    } else {
+      return RouteSettings(name: AppRoutes.SIGN_IN);
+    }
+  }
 }

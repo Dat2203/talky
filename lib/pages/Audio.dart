@@ -29,8 +29,11 @@ class _AudioScreenState extends State<AudioScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _audioPlayer = AudioPlayer()
+    _audioPlayer = AudioPlayer(
+
+    )
       ..setAsset('assets/audio/KhiNguoiMinhYeuKhoc-PhanManhQuynh-4291421.mp3');
+    _audioPlayer.setLoopMode(LoopMode.one);
   }
 
   @override

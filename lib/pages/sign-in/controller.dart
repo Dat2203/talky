@@ -12,8 +12,9 @@ GoogleSignIn _googleSignIn = GoogleSignIn(scopes: const []);
 class SignInController extends GetxController {
   final state = SignInState();
   SignInController();
-
+  final _auth = FirebaseAuth.instance;
   final db = FirebaseFirestore.instance;
+  Rx<String> verifyId =''.obs;
 
   Future<void> handleSignIn() async {
     try {
@@ -39,8 +40,6 @@ class SignInController extends GetxController {
         userGoogleLogin.email = email;
         userGoogleLogin.displayName = displayName;
         userGoogleLogin.accessToken = id;
-
-
 
         var userbase = await db
             .collection("users")
@@ -71,12 +70,52 @@ class SignInController extends GetxController {
               .add(data);
         }
         UserStore.to.saveProfile(userGoogleLogin);
-        print('Ok');
         Get.offAndToNamed(AppRoutes.APPLICATION);
       }
-
     } catch (e) {
       print(e.toString());
+    }
+  }
+
+
+
+  Future<void> handleSiginWithPhone(String phoneNum) async {
+    await _auth.setSettings(appVerificationDisabledForTesting: false);
+    _auth.verifyPhoneNumber(
+      phoneNumber: phoneNum,
+      verificationCompleted: (PhoneAuthCredential credential) async {
+
+        await _auth.signInWithCredential(credential);
+
+      },
+        verificationFailed: (FirebaseAuthException e) {
+        print("-->fail: ${e}");
+          if (e.code == 'invalid-phone-number') {
+            print('The provided phone number is not valid.');
+          }
+
+          // Handle other errors
+        },
+      codeSent: (String verificationId, int? resendToken) async {
+          this.verifyId.value = verificationId;
+      },
+      timeout: const Duration(seconds: 60),
+      codeAutoRetrievalTimeout: (String verificationId) {
+        // Auto-resolution timed out...
+      },
+    ).catchError((error) {
+      print("err --> ${error}");
+    });
+    Get.toNamed(AppRoutes.OTP_VERIFY);
+  }
+
+  Future verifyOTP(String otp)async {
+    try{
+      var credential= await _auth.signInWithCredential(PhoneAuthProvider.credential(verificationId: this.verifyId.value, smsCode: otp));
+      if(credential.user != null){
+        Get.offAndToNamed(AppRoutes.APPLICATION);
+      }
+    }catch(e){
     }
   }
 

@@ -103,3 +103,17 @@ class _LocationScreenState extends State<LocationScreen> {
     );
   }
 }
+
+abstract class A {
+  void osad(){
+    print('đá');
+  }
+  int bdasd(){
+    return 1;
+  }
+}
+
+class B extends A{
+
+
+}

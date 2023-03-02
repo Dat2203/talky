@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../routes/name.dart';
 import 'controller.dart';
 
 class SignInPage extends GetView<SignInController> {
@@ -57,6 +58,7 @@ class SignInPage extends GetView<SignInController> {
           ElevatedButton(
             onPressed: () {
               controller.handleSignIn();
+              // Get.toNamed(AppRoutes.OTPSIGNIN);
             },
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.deepPurpleAccent,
