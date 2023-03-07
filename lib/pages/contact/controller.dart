@@ -11,7 +11,7 @@ import 'package:talky/routes/name.dart';
 import '../../main.dart';
 import '../../model/push_notification.dart';
 import '../../shared/bandage.dart';
-import '../../user-store.dart';
+import '../../user_store.dart';
 
 
 

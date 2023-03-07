@@ -59,6 +59,7 @@ dependencies:
   rxdart: ^0.27.7
   webview_flutter: ^4.0.5
   otp_text_field: ^1.1.3
+  google_fonts: ^4.0.3
 
 
 dev_dependencies:

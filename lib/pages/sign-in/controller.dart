@@ -5,7 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:talky/model/user_model.dart';
 import 'package:talky/pages/sign-in/state.dart';
 import 'package:talky/routes/name.dart';
-import 'package:talky/user-store.dart';
+import 'package:talky/user_store.dart';
 
 GoogleSignIn _googleSignIn = GoogleSignIn(scopes: const []);
 

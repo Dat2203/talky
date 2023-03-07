@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:talky/configuration_store.dart';
 import 'package:talky/routes/name.dart';
-import 'package:talky/user-store.dart';
+import 'package:talky/user_store.dart';
 
-import '../user-store.dart';
+import '../user_store.dart';
 
 class RouteWellComeMiddleWare extends GetMiddleware {
   @override

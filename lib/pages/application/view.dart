@@ -10,34 +10,52 @@ import 'package:talky/pages/notification.dart';
 import '../Audio.dart';
 import 'controller.dart';
 
-class ApplicationPage extends GetView<ApplicationController> {
-     ApplicationPage({Key? key}):super(key: key);
+final appBars = [
+  AppBar(
+    title: Text("Message") ,
+    backgroundColor: Colors.transparent,
+    elevation: 0,
+  ),
+  AppBar(title: Text("Contact"), backgroundColor: Colors.transparent),
+  AppBar(title: Text("Setting"), backgroundColor: Colors.transparent),
+];
 
-  Widget _buildPageView(){
+class ApplicationPage extends GetView<ApplicationController> {
+  ApplicationPage({Key? key}) : super(key: key);
+
+  Widget _buildPageView() {
     return PageView(
       controller: controller.pageController,
       onPageChanged: controller.handlePageChange,
       children: [
-        Center(child: Text("chat"),),
-        Center(child: WebviewScreen()),
+        Center(
+          child: Text("chat"),
+        ),
+        Center(child: AudioScreen()),
         Center(child: LocationScreen()),
       ],
     );
   }
-  
-  Widget _buildBottomPageView(){
-    return  BottomNavigationBar(
+
+  Widget _buildBottomPageView() {
+    return BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         onTap: controller.handleNavbarTap,
-         showSelectedLabels: true,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        currentIndex: controller.state.pageIndex,
         items: controller.bottomTabs);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildPageView(),
-      bottomNavigationBar: _buildBottomPageView(),
+    return Obx(
+      () => Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: appBars[controller.state.pageIndex],
+        body: _buildPageView(),
+        bottomNavigationBar: _buildBottomPageView(),
+      ),
     );
   }
 }

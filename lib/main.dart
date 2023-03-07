@@ -12,7 +12,8 @@ import 'package:talky/configuration_store.dart';
 import 'package:talky/firebase_options.dart';
 import 'package:talky/routes/pages.dart';
 import 'package:talky/storage_service.dart';
-import 'package:talky/user-store.dart';
+import 'package:talky/theme.dart';
+import 'package:talky/user_store.dart';
 
 import 'helper/helper_notification.dart';
 
@@ -67,9 +68,9 @@ class MyApp extends StatelessWidget {
       child: ScreenUtilInit(
         builder: (context, child) => GetMaterialApp(
           title: 'Flutter Demo',
-          theme: ThemeData(
-           
-          ),
+          theme:Themes.lightTheme,
+          darkTheme: Themes.darkTheme,
+          themeMode: ThemeMode.system,
           initialRoute: AppPages.INITIAL,
           getPages: AppPages.routes,
         ),
