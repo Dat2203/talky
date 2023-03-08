@@ -21,4 +21,6 @@ class AppRoutes{
 
   static const OTP_VERIFY ='/otp_verify';
 
+  static const CHATBOX ='/chat_box';
+
 }

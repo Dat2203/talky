@@ -3,13 +3,14 @@ import 'package:google_fonts/google_fonts.dart';
 
 class Themes {
   static ThemeData darkTheme = ThemeData(
-    textTheme: GoogleFonts.robotoTextTheme(
-
+    textTheme: TextTheme(
+      bodyMedium: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color: Colors.white),
     ),
+    primaryColorLight: Color.fromRGBO(51, 51, 51, 1),
     shadowColor: Colors.grey.shade900,
     brightness: Brightness.dark,
-    backgroundColor: Color.fromARGB(255, 37, 36, 36),
-    scaffoldBackgroundColor: Color.fromARGB(255, 37, 36, 36),
+    backgroundColor: Colors.black,
+    scaffoldBackgroundColor: Colors.black,
     appBarTheme: AppBarTheme(
      backgroundColor: Colors.transparent,
       elevation: 0,
@@ -22,26 +23,29 @@ class Themes {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
     ),
+    iconTheme: IconThemeData(
+        size: 20
+    ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(foregroundColor: Colors.grey),
     ),
   );
 
   static ThemeData lightTheme = ThemeData(
-      textTheme: GoogleFonts.robotoTextTheme(
+
+      textTheme: TextTheme(
+        bodyMedium: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color: Colors.white),
       ),
       backgroundColor: Colors.white,
       scaffoldBackgroundColor: Colors.white,
-      // appBarTheme: AppBarTheme(
-      //   shape: RoundedRectangleBorder(
-      //       borderRadius: BorderRadius.only(
-      //     bottomLeft: Radius.circular(20),
-      //     bottomRight: Radius.circular(20),
-      //   )),
-      //   color: Color.fromARGB(255, 174, 242, 135),
-      //   elevation: 0,
-      //   foregroundColor: Colors.black,
-      // ),
+      primaryColorLight: Color.fromRGBO(51, 51, 51, 1),
+      appBarTheme: AppBarTheme(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      iconTheme: IconThemeData(
+        size: 20
+      ),
       primaryColor: Color.fromARGB(255, 174, 242, 135),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(

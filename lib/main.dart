@@ -67,6 +67,7 @@ class MyApp extends StatelessWidget {
     return OverlaySupport(
       child: ScreenUtilInit(
         builder: (context, child) => GetMaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme:Themes.lightTheme,
           darkTheme: Themes.darkTheme,

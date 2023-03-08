@@ -20,18 +20,18 @@ class ApplicationController extends GetxController {
     tabTitles = ["Chat", "Contact", "Account"];
     bottomTabs = [
       BottomNavigationBarItem(
-          icon: Icon(CupertinoIcons.chat_bubble_2_fill),
-          activeIcon:Icon(CupertinoIcons.chat_bubble_2_fill,color: Colors.blue,) ,
+          icon: Icon(CupertinoIcons.chat_bubble_2_fill,size: 15,),
+          activeIcon:Icon(CupertinoIcons.chat_bubble_2_fill,color: Colors.blue,size: 15) ,
           label: "Chat",
           backgroundColor: Colors.blue),
       BottomNavigationBarItem(
-          icon: Icon(CupertinoIcons.bell_fill),
-          activeIcon:Icon(CupertinoIcons.bell_fill,color: Colors.blue,) ,
+          icon: Icon(CupertinoIcons.bell_fill,size: 15),
+          activeIcon:Icon(CupertinoIcons.bell_fill,color: Colors.blue,size: 15) ,
           label: "Contact",
           backgroundColor: Colors.blue),
       BottomNavigationBarItem(
-          icon: Icon(CupertinoIcons.person_2_fill),
-          activeIcon:Icon(CupertinoIcons.person_2_fill,color: Colors.blue,) ,
+          icon: Icon(CupertinoIcons.person_2_fill,size: 15),
+          activeIcon:Icon(CupertinoIcons.person_2_fill,color: Colors.blue,size: 15) ,
           label: "Acount",
           backgroundColor: Colors.blue),
     ];

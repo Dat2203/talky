@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:talky/pages/message/logic.dart';
 
 import '../contact/controller.dart';
 import 'controller.dart';
@@ -8,5 +9,6 @@ class ApplicationBinding extends Bindings {
   void dependencies() {
     Get.lazyPut(() => ApplicationController());
     Get.lazyPut(()=>ContactController());
+    Get.lazyPut(()=>MessageLogic());
   }
 }

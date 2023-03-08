@@ -5,11 +5,12 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:talky/middleware/route-rwellcome.dart';
 import 'package:talky/pages/application/binding.dart';
+import 'package:talky/pages/chat/binding.dart';
+import 'package:talky/pages/chat/view.dart';
 import 'package:talky/pages/sign-in/OTPScreen.dart';
 import 'package:talky/pages/sign-in/index.dart';
 import 'package:talky/pages/sign-in/signin-phonenumber.dart';
 import 'package:talky/pages/wellcome/binding.dart';
-
 import '../pages/application/view.dart';
 import '../pages/wellcome/view.dart';
 import 'name.dart';
@@ -47,6 +48,11 @@ class AppPages {
         name: AppRoutes.OTP_VERIFY,
         page: () => OTPScreen(),
         binding: SignInBinding()),
+
+    GetPage(
+        name: AppRoutes.CHATBOX,
+        page: () => ChatPage(),
+        binding: ChatBinding())
 
 
     // GetPage
