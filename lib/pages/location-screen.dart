@@ -3,6 +3,51 @@ import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:location/location.dart';
 
+import '../model/message.dart';
+import '../util/index.dart';
+
+
+final List<MessageModel> messages2 = [
+  MessageModel(
+    content: "ấdadadasd",
+    isSeen: false,
+    reciverId: "1",
+    senderId: "0",
+  ),
+  MessageModel(
+    content: "ấdadadasd",
+    isSeen: false,
+    reciverId: "1",
+    senderId: "0",
+  ),
+  MessageModel(
+    content: "ấdadadasd",
+    isSeen: false,
+    reciverId: "0",
+    senderId: "1",
+  ),
+  MessageModel(
+    content: "ấdadadasd",
+    isSeen: false,
+    reciverId: "1",
+    senderId: "0",
+  ),
+  MessageModel(
+    content: "ấdadadasd",
+    isSeen: false,
+    reciverId: "1",
+    senderId: "0",
+  ),
+  MessageModel(
+    content: "ấdadadasd",
+    isSeen: false,
+    reciverId: "0",
+    senderId: "1",
+  ),
+
+
+];
+
 class LocationScreen extends StatefulWidget {
   const LocationScreen({Key? key}) : super(key: key);
 
@@ -79,7 +124,7 @@ class _LocationScreenState extends State<LocationScreen> {
             const SizedBox(height: 25),
             ElevatedButton(
                 onPressed: ()async{
-                 // await _audioPlayer.play();
+                  print(Utils.chunkList(messages2).toString());
                 },
                 child: const Text('play audio')),
             const SizedBox(height: 25),

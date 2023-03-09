@@ -1,8 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:talky/shared/list_message.dart';
+import 'package:talky/util/index.dart';
 
+import '../../model/message.dart';
 import 'controller.dart';
+
+final List<MessageModel> messages1= [
+  MessageModel(
+    content: "ấdadadasd",
+    isSeen: false,
+    reciverId: "1",
+    senderId: "0",
+  ),
+  MessageModel(
+    content: "ấdadadasd",
+    isSeen: false,
+    reciverId: "1",
+    senderId: "0",
+  ),
+  MessageModel(
+    content: "ấdadadasd",
+    isSeen: false,
+    reciverId: "0",
+    senderId: "1",
+  ),
+  MessageModel(
+    content: "ấdadadasd",
+    isSeen: false,
+    reciverId: "0",
+    senderId: "1",
+  ),
+  MessageModel(
+    content: "ấdadadasd",
+    isSeen: false,
+    reciverId: "1",
+    senderId: "0",
+  ),
+  MessageModel(
+    content: "ấdadadasd",
+    isSeen: false,
+    reciverId: "1",
+    senderId: "0",
+  ),
+  MessageModel(
+    content: "ấdadadasd",
+    isSeen: false,
+    reciverId: "0",
+    senderId: "1",
+  ),
+
+
+];
 
 class ChatPage extends GetView<ChatController> {
 
@@ -50,12 +100,9 @@ class ChatPage extends GetView<ChatController> {
                   Text("Robert Downey Jr",style: Get.textTheme.bodyText1),
                   SizedBox(height: 2.h,),
                   Text("Active", style: Get.textTheme.bodySmall,),
-
                 ],
               ),
-
             ],
-
           ),
         ),
       ),
@@ -70,6 +117,8 @@ class ChatPage extends GetView<ChatController> {
   }
   @override
   Widget build(BuildContext context) {
+    var messageChunk = Utils.chunkList(messages1);
+
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
@@ -78,29 +127,19 @@ class ChatPage extends GetView<ChatController> {
             children: <Widget>[
               Align(
                   alignment: Alignment.topLeft,
-                  child: ListView.builder(
-                    reverse: true,
-                    shrinkWrap: true,
-                    itemCount: 14,
-                    itemBuilder: (context, index) =>Container(
-                      padding: EdgeInsets.symmetric(vertical: 7,horizontal: 5),
-                      margin:  EdgeInsets.symmetric(vertical: 20),
-                      constraints: BoxConstraints(
-                        minHeight: 30.h,
-                        maxWidth: 150.w,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(15.h)),
-                        color: Color.fromRGBO(51, 51, 51, 1).withOpacity(0.95),
-                      ),
-                      child: Text("dádadda ${index}",style: Get.textTheme.bodyText1,),
-                    ) ,)
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      child: ListView.builder(
+                        reverse: true,
+                          shrinkWrap: true,
+                        itemCount: messageChunk.length,
+                        itemBuilder: (context, index) =>ListMesssage(messages: messageChunk[index])),
+                    ),
               ),
               Align(
                 alignment: Alignment.bottomLeft,
                 child: Container(
                   padding: EdgeInsets.only(left: 10,bottom: 10,top: 10),
-                  width: double.infinity,
                   color: Colors.black.withOpacity(0.95),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -140,18 +179,12 @@ class ChatPage extends GetView<ChatController> {
                           ),
                         ),
                       ),
-                      // FloatingActionButton(
-                      //   onPressed: (){},
-                      //   child: Icon(Icons.send,color: Colors.white,size: 18,),
-                      //   backgroundColor: Colors.blue,
-                      //   elevation: 0,
-                      // ),
+
                     ],
 
                   ),
                 ),
               ),
-
             ],
           )
       ),

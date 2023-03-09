@@ -10,10 +10,12 @@ import 'package:just_audio_background/just_audio_background.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:talky/configuration_store.dart';
 import 'package:talky/firebase_options.dart';
+import 'package:talky/pages/chat/view.dart';
 import 'package:talky/routes/pages.dart';
 import 'package:talky/storage_service.dart';
 import 'package:talky/theme.dart';
 import 'package:talky/user_store.dart';
+import 'package:talky/util/index.dart';
 
 import 'helper/helper_notification.dart';
 
@@ -54,6 +56,8 @@ void main() async {
       HelperNotification.initialize(flutterLocalNotificationsPlugin);
     }
   } catch (e) {};
+
+
 
   runApp(const MyApp());
 }
