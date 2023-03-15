@@ -7,9 +7,15 @@ import 'package:talky/util/index.dart';
 import '../../model/message.dart';
 import 'controller.dart';
 
-final List<MessageModel> messages1= [
+final List<MessageModel> messages2= [
   MessageModel(
-    content: "ấdadadasd",
+    content: "tren pho dong",
+    isSeen: false,
+    reciverId: "1",
+    senderId: "0",
+  ),
+  MessageModel(
+    content: "Hom nay toi buon mot minh ",
     isSeen: false,
     reciverId: "1",
     senderId: "0",
@@ -115,9 +121,11 @@ class ChatPage extends GetView<ChatController> {
       ),
     );
   }
+
+
   @override
   Widget build(BuildContext context) {
-    var messageChunk = Utils.chunkList(messages1);
+    var messageChunk = Utils.chunkList(messages2);
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),

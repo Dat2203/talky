@@ -40,20 +40,20 @@ class _ListMesssageState extends State<ListMesssage> {
                 ),
           Expanded(
             child: Container(
-              width: 200,
               child: ListView.builder(
                 shrinkWrap: true,
                 reverse: true,
                 physics: ClampingScrollPhysics(),
                 itemCount: widget.messages.length,
                 itemBuilder: (context, index) => MessageItem(
+                    content: widget.messages[index].content!,
                     isSender: isSender,
                     isFirst: index == 0,
-                    isLast:  index == length-1,
+                    isLast: index == length - 1,
                     hasMidle: length > 1),
               ),
             ),
-          )
+          ),
         ],
       ),
     );
