@@ -7,11 +7,13 @@ import 'package:talky/middleware/route-rwellcome.dart';
 import 'package:talky/pages/application/binding.dart';
 import 'package:talky/pages/chat/binding.dart';
 import 'package:talky/pages/chat/view.dart';
+import 'package:talky/pages/profile/binding.dart';
 import 'package:talky/pages/sign-in/OTPScreen.dart';
 import 'package:talky/pages/sign-in/index.dart';
 import 'package:talky/pages/sign-in/signin-phonenumber.dart';
 import 'package:talky/pages/wellcome/binding.dart';
 import '../pages/application/view.dart';
+import '../pages/profile/view.dart';
 import '../pages/wellcome/view.dart';
 import 'name.dart';
 
@@ -52,7 +54,11 @@ class AppPages {
     GetPage(
         name: AppRoutes.CHATBOX,
         page: () => ChatPage(),
-        binding: ChatBinding())
+        binding: ChatBinding()),
+    GetPage(
+        name: AppRoutes.ME,
+        page: () => ProfilePage(),
+        binding: ProfileBinding()),
 
 
     // GetPage

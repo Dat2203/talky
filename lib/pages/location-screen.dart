@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/get_core.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:location/location.dart';
-
+import 'package:stream_chat/stream_chat.dart';
+import 'package:talky/streamchat_option.dart';
 import '../model/message.dart';
+import '../routes/name.dart';
 import '../util/index.dart';
-
 
 final List<MessageModel> messages2 = [
   MessageModel(
@@ -44,8 +47,6 @@ final List<MessageModel> messages2 = [
     reciverId: "0",
     senderId: "1",
   ),
-
-
 ];
 
 class LocationScreen extends StatefulWidget {
@@ -56,11 +57,10 @@ class LocationScreen extends StatefulWidget {
 }
 
 class _LocationScreenState extends State<LocationScreen> {
-
   Location location = new Location();
   late bool _serviceEnabled;
   late PermissionStatus _permissionGranted;
-   LocationData? _userLocation;
+  LocationData? _userLocation;
 
   late AudioPlayer _audioPlayer;
 
@@ -86,20 +86,20 @@ class _LocationScreenState extends State<LocationScreen> {
 
     final _locationData = await location.getLocation();
 
-    print("latitude: "+_locationData.altitude.toString());
-    print("longtitude: "+_locationData.longitude.toString());
+    print("latitude: " + _locationData.altitude.toString());
+    print("longtitude: " + _locationData.longitude.toString());
 
     setState(() {
       _userLocation = _locationData;
     });
-
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _audioPlayer = AudioPlayer()..setAsset('assets/audio/KhiNguoiMinhYeuKhoc-PhanManhQuynh-4291421.mp3');
+    _audioPlayer = AudioPlayer()
+      ..setAsset('assets/audio/KhiNguoiMinhYeuKhoc-PhanManhQuynh-4291421.mp3');
   }
 
   @override
@@ -108,8 +108,6 @@ class _LocationScreenState extends State<LocationScreen> {
     _audioPlayer.dispose();
     super.dispose();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -123,24 +121,24 @@ class _LocationScreenState extends State<LocationScreen> {
                 child: const Text('Check Location')),
             const SizedBox(height: 25),
             ElevatedButton(
-                onPressed: ()async{
-                  print(Utils.chunkList(messages2).toString());
+                onPressed: () {
+                  Get.toNamed(AppRoutes.ME);
                 },
                 child: const Text('play audio')),
             const SizedBox(height: 25),
             // Display latitude & longtitude
             _userLocation != null
                 ? Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Wrap(
-                textDirection: TextDirection.rtl,
-                children: [
-                  Text('Your latitude: ${_userLocation?.altitude}'),
-                  const SizedBox(width: 10),
-                  Text('Your longtitude: ${_userLocation?.longitude}')
-                ],
-              ),
-            )
+                    padding: const EdgeInsets.all(8.0),
+                    child: Wrap(
+                      textDirection: TextDirection.rtl,
+                      children: [
+                        Text('Your latitude: ${_userLocation?.altitude}'),
+                        const SizedBox(width: 10),
+                        Text('Your longtitude: ${_userLocation?.longitude}')
+                      ],
+                    ),
+                  )
                 : Container()
           ],
         ),
@@ -150,15 +148,13 @@ class _LocationScreenState extends State<LocationScreen> {
 }
 
 abstract class A {
-  void osad(){
+  void osad() {
     print('đá');
   }
-  int bdasd(){
+
+  int bdasd() {
     return 1;
   }
 }
 
-class B extends A{
-
-
-}
+class B extends A {}

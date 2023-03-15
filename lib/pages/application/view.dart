@@ -33,7 +33,7 @@ class ApplicationPage extends GetView<ApplicationController> {
         Center(
           child: MessagePage(),
         ),
-        Center(child: AudioScreen()),
+        Center(child: Center()),
         Center(child: LocationScreen()),
       ],
     );

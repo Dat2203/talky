@@ -8,7 +8,9 @@ import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:overlay_support/overlay_support.dart';
+import 'package:stream_chat/stream_chat.dart';
 import 'package:talky/configuration_store.dart';
+import 'package:talky/constant/env.dart';
 import 'package:talky/firebase_options.dart';
 import 'package:talky/pages/chat/view.dart';
 import 'package:talky/routes/pages.dart';
@@ -26,9 +28,13 @@ Future firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
-late final cameras ;
+late final cameras;
 
 void main() async {
+  final client = StreamChatClient(
+    streamApiKey,
+    logLevel: Level.INFO,
+  );
   WidgetsFlutterBinding.ensureInitialized();
   //
   // await JustAudioBackground.init(
@@ -36,6 +42,8 @@ void main() async {
   //   androidNotificationChannelName: 'Audio playback',
   //   androidNotificationOngoing: true,
   // );
+
+
 
   //
   await Get.putAsync<StorageService>(() => StorageService().init());
@@ -55,9 +63,8 @@ void main() async {
       FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
       HelperNotification.initialize(flutterLocalNotificationsPlugin);
     }
-  } catch (e) {};
-
-
+  } catch (e) {}
+  ;
 
   runApp(const MyApp());
 }
@@ -73,7 +80,7 @@ class MyApp extends StatelessWidget {
         builder: (context, child) => GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
-          theme:Themes.lightTheme,
+          theme: Themes.lightTheme,
           darkTheme: Themes.darkTheme,
           themeMode: ThemeMode.system,
           initialRoute: AppPages.INITIAL,
