@@ -1,4 +1,6 @@
+import 'package:stream_chat/stream_chat.dart';
 import 'package:talky/model/message.dart';
+import 'package:talky/model/user_model.dart';
 
 class Utils {
   //chunk list message into revicer and sender
@@ -21,6 +23,45 @@ class Utils {
     }
 
     return chunkList;
+  }
+
+
+  static String getChannelName(Channel channel) {
+    String id = '101991853508428205227';
+
+    if (channel.state?.members.isNotEmpty ?? false) {
+      final otherMembers = channel.state?.members
+          .where(
+            (element) => element.userId !=  id,
+      )
+          .toList();
+
+      if (otherMembers?.length == 1) {
+        return otherMembers!.first.user?.name ?? 'No name';
+      } else {
+        return 'Multiple users';
+      }
+    } else {
+      return 'No Channel Name';
+    }
+  }
+
+  static String? getChannelImage(Channel channel) {
+    String id = '101991853508428205227';
+    if (channel.image != null) {
+      return channel.image!;
+    } else if (channel.state?.members.isNotEmpty ?? false) {
+      final otherMembers = channel.state?.members
+          .where(
+            (element) => element.userId != id,
+      )
+          .toList();
+
+      if (otherMembers?.length == 1) {
+        return otherMembers!.first.user?.image;
+      }
+    }
+    return null;
   }
 }
 

@@ -6,22 +6,4 @@ import 'state.dart';
 
 class ChatController extends GetxController {
   final ChatState state = ChatState();
-  final _auth = FirebaseAuth.instance;
-  late Stream<List<Channel>> channelQuerry;
-
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-    channelQuerry = StreamChat.clinet.queryChannels(
-      state: true,
-      filter: Filter.and([
-        Filter.in_("members", [_auth.currentUser?.uid! as Object])
-      ]),
-    );
-  }
-
-
-
-
 }

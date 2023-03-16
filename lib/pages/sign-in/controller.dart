@@ -76,7 +76,7 @@ class SignInController extends GetxController {
         }
 
         client.connectUser(
-            streamchat.User(id: user.id), client.devToken(user.id).rawValue);
+            streamchat.User(id: user.id,image: photoUrl,name: displayName), client.devToken(user.id).rawValue);
 
         UserStore.to.saveProfile(userGoogleLogin);
         Get.offAndToNamed(AppRoutes.APPLICATION);

@@ -1,1 +1,2 @@
 const streamApiKey ='32fu7m3vfpbp';
+const DEFAULT_EMPTY_AVATAR_URL ='https://thumbs.dreamstime.com/z/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg';

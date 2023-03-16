@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:stream_chat/stream_chat.dart';
 import 'package:talky/shared/chat_item.dart';
 
 import 'logic.dart';
@@ -8,14 +9,16 @@ import 'logic.dart';
 class MessagePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final logic = Get.find<MessageLogic>();
+    final controller = Get.find<MessageLogic>();
     final state = Get.find<MessageLogic>().state;
 
     return Container(
+      height: MediaQuery.of(context).size.height,
       padding: EdgeInsets.symmetric(horizontal: 10.w),
       child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
                   height: 40.h,
@@ -34,22 +37,29 @@ class MessagePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
-                    margin: EdgeInsets.symmetric(vertical: 20.h),
+
+            FutureBuilder<List<Channel>>(
+                future: controller.channelQuerry,
+                builder: (context, snapshot) {
+                if(!snapshot.hasData){
+                  return const Center(
                     child: Text(
-                      "Message",
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white),
-                    )),
-                // ListView.builder(
-                ListView.builder(
+                      'So empty.\nGo and message someone.',
+                      textAlign: TextAlign.center,
+                    ),
+                  );
+                }
+
+                return ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 10,
-                  itemBuilder: (context, index) => ChatItem(),
-                ),
+                  itemCount: snapshot.data?.length ?? 0,
+                  itemBuilder: (context, index) => ChatItem(
+                    channel: snapshot.data![index],
+                  ),);
+              },)
+
+
               ],
             ),
           )

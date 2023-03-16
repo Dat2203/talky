@@ -29,6 +29,7 @@ class ApplicationPage extends GetView<ApplicationController> {
     return PageView(
       controller: controller.pageController,
       onPageChanged: controller.handlePageChange,
+
       children: [
         Center(
           child: MessagePage(),
