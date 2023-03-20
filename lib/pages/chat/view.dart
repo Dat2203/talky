@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:stream_chat/stream_chat.dart';
+import 'package:talky/shared/avatar_circle.dart';
 import 'package:talky/shared/list_message.dart';
 import 'package:talky/util/index.dart';
 
@@ -62,6 +64,11 @@ final List<MessageModel> messages2= [
 
 class ChatPage extends GetView<ChatController> {
 
+    Channel channel = Get.arguments;
+
+
+
+
   _buildAppBar(){
     return AppBar(
       elevation: 0,
@@ -80,10 +87,9 @@ class ChatPage extends GetView<ChatController> {
               Stack(
                 children: [
                   Positioned(
-                      child: CircleAvatar(
-                        radius: 15, // Image radius
-                        backgroundImage: NetworkImage(
-                            'https://phantom-marca.unidadeditorial.es/38d327959012f4d1955e77a9a34d5d2c/resize/660/f/webp/assets/multimedia/imagenes/2023/01/12/16735402991293.jpg'),
+                      child: AvatarCircleCachedNetwork(
+                        photoUrl:  Utils.getChannelImage(channel),
+                        size: 15,
                       )),
                   Positioned(
                       bottom: 0,
@@ -125,6 +131,7 @@ class ChatPage extends GetView<ChatController> {
 
   @override
   Widget build(BuildContext context) {
+    print(channel.id);
     var messageChunk = Utils.chunkList(messages2);
 
     return GestureDetector(

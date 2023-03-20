@@ -10,44 +10,6 @@ import '../model/message.dart';
 import '../routes/name.dart';
 import '../util/index.dart';
 
-final List<MessageModel> messages2 = [
-  MessageModel(
-    content: "ấdadadasd",
-    isSeen: false,
-    reciverId: "1",
-    senderId: "0",
-  ),
-  MessageModel(
-    content: "ấdadadasd",
-    isSeen: false,
-    reciverId: "1",
-    senderId: "0",
-  ),
-  MessageModel(
-    content: "ấdadadasd",
-    isSeen: false,
-    reciverId: "0",
-    senderId: "1",
-  ),
-  MessageModel(
-    content: "ấdadadasd",
-    isSeen: false,
-    reciverId: "1",
-    senderId: "0",
-  ),
-  MessageModel(
-    content: "ấdadadasd",
-    isSeen: false,
-    reciverId: "1",
-    senderId: "0",
-  ),
-  MessageModel(
-    content: "ấdadadasd",
-    isSeen: false,
-    reciverId: "0",
-    senderId: "1",
-  ),
-];
 
 class LocationScreen extends StatefulWidget {
   const LocationScreen({Key? key}) : super(key: key);
@@ -117,7 +79,9 @@ class _LocationScreenState extends State<LocationScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-                onPressed: _getUserLocation,
+                onPressed: (){
+                  print(StreamChat.clinet.state.isBlank);
+                },
                 child: const Text('Check Location')),
             const SizedBox(height: 25),
             ElevatedButton(

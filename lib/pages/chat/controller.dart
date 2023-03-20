@@ -6,4 +6,13 @@ import 'state.dart';
 
 class ChatController extends GetxController {
   final ChatState state = ChatState();
+
+  @override
+  void onInit() {
+    super.onInit();
+  }
+  void setChannal(){
+  }
+
+
 }

@@ -58,7 +58,8 @@ class Utils {
           .toList();
 
       if (otherMembers?.length == 1) {
-        return otherMembers!.first.user?.image;
+
+        return  otherMembers!.first.user?.image;
       }
     }
     return null;

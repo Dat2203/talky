@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,7 +22,7 @@ class _ChatItemState extends State<ChatItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Get.toNamed(AppRoutes.CHATBOX);
+        Get.toNamed(AppRoutes.CHATBOX, arguments: widget.channel);
       },
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 5.h),
@@ -29,10 +30,21 @@ class _ChatItemState extends State<ChatItem> {
           leading: Stack(
             children: [
               Positioned(
-                  child: CircleAvatar(
-                radius: 27, // Image radius
-                backgroundImage: NetworkImage(Utils.getChannelImage(widget.channel) ?? DEFAULT_EMPTY_AVATAR_URL),
-              )),
+                 // Image radius
+                child: CachedNetworkImage(
+                  placeholder: (context, url) => new CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => CircleAvatar(
+                    radius: 27,
+                    backgroundImage: NetworkImage(DEFAULT_EMPTY_AVATAR_URL),
+                  ), imageUrl: Utils.getChannelImage(widget.channel) ?? DEFAULT_EMPTY_AVATAR_URL,
+                  imageBuilder: (context, imageProvider) { // you can access to imageProvider
+                    return CircleAvatar(
+                      radius: 27.0,// or any widget that use imageProvider like (PhotoView)
+                      backgroundImage: imageProvider,
+                    );
+                  },
+                ),
+              ),
               Positioned(
                   bottom: 0,
                   right: 0,

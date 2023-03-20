@@ -8,6 +8,7 @@ import 'package:talky/pages/contact/index.dart';
 import 'package:talky/pages/location-screen.dart';
 import 'package:talky/pages/message/view.dart';
 import 'package:talky/pages/notification.dart';
+import 'package:talky/shared/keep_alive_wrapper.dart';
 
 import '../Audio.dart';
 import 'controller.dart';
@@ -29,10 +30,9 @@ class ApplicationPage extends GetView<ApplicationController> {
     return PageView(
       controller: controller.pageController,
       onPageChanged: controller.handlePageChange,
-
       children: [
         Center(
-          child: MessagePage(),
+          child: KeepAliveWrapper(child: MessagePage(),),
         ),
         Center(child: Center()),
         Center(child: LocationScreen()),

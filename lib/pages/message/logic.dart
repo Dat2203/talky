@@ -14,7 +14,6 @@ class MessageLogic extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     channelQuerry = StreamChat.clinet.queryChannels(
       state: true,
