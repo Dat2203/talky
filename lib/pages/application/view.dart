@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:talky/pages/Gellary.dart';
-import 'package:talky/pages/WebviewScreen.dart';
 import 'package:talky/pages/camera.dart';
 import 'package:talky/pages/contact/index.dart';
 import 'package:talky/pages/location-screen.dart';

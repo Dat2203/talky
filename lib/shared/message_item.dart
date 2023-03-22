@@ -34,6 +34,7 @@ class _MessageItemState extends State<MessageItem> {
       child: UnconstrainedBox(
         alignment: widget.isSender ? Alignment.centerRight : Alignment.centerLeft,
         child: Container(
+          constraints: BoxConstraints( maxWidth: 250.w),
           padding: EdgeInsets.symmetric(vertical: 7, horizontal: 10),
           margin: EdgeInsets.symmetric(vertical: 1),
           decoration: BoxDecoration(
@@ -47,6 +48,7 @@ class _MessageItemState extends State<MessageItem> {
           ),
           child: Text(
             widget.content,
+            maxLines: 4,
             style: Get.textTheme.bodyText1,
           ),
         ),
@@ -98,6 +100,6 @@ class _MessageItemState extends State<MessageItem> {
         topLeft: Radius.circular(5.h),
         bottomLeft: Radius.circular(5.h),
         bottomRight: Radius.circular(15.h),
-        topRight: Radius.circular(5.h));
+        topRight: Radius.circular(15.h));
   }
 }

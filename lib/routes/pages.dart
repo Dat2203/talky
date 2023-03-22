@@ -57,6 +57,7 @@ class AppPages {
         binding: ChatBinding()),
     GetPage(
         name: AppRoutes.ME,
+        transition: Transition.leftToRight,
         page: () => ProfilePage(),
         binding: ProfileBinding()),
 

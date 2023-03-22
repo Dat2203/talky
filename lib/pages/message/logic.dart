@@ -11,6 +11,7 @@ class MessageLogic extends GetxController {
   final MessageState state = MessageState();
   final _auth = FirebaseAuth.instance;
   late Future<List<Channel>> channelQuerry;
+  final currentUser = UserStore.to.profile;
 
   @override
   void onInit() {
@@ -18,7 +19,7 @@ class MessageLogic extends GetxController {
     channelQuerry = StreamChat.clinet.queryChannels(
       state: true,
       filter: Filter.and([
-        Filter.in_('members',['101991853508428205227'])
+        Filter.in_('members',[currentUser.accessToken!])
       ]),
     ).last;
   }

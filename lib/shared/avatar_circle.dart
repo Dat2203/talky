@@ -13,8 +13,9 @@ class AvatarCircleCachedNetwork extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(photoUrl);
-    return CachedNetworkImage(
+
+    return
+      CachedNetworkImage(
       errorWidget: (context, url, error) => CircleAvatar(
         radius: size ?? 20,
         backgroundImage: NetworkImage(DEFAULT_EMPTY_AVATAR_URL),

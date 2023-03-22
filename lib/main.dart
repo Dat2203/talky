@@ -6,20 +6,18 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
-import 'package:just_audio_background/just_audio_background.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:stream_chat/stream_chat.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import 'package:talky/configuration_store.dart';
 import 'package:talky/constant/env.dart';
 import 'package:talky/firebase_options.dart';
-import 'package:talky/pages/chat/view.dart';
 import 'package:talky/routes/pages.dart';
 import 'package:talky/storage_service.dart';
 import 'package:talky/theme.dart';
 import 'package:talky/user_store.dart';
-import 'package:talky/util/index.dart';
-
 import 'helper/helper_notification.dart';
+import 'package:talky/streamchat_option.dart' as StreamChatCustom;
 
 Future firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("Handling a background message: ${message.messageId}");
@@ -42,8 +40,6 @@ void main() async {
   //   androidNotificationChannelName: 'Audio playback',
   //   androidNotificationOngoing: true,
   // );
-
-
 
   //
   await Get.putAsync<StorageService>(() => StorageService().init());
@@ -87,6 +83,8 @@ class MyApp extends StatelessWidget {
           themeMode: ThemeMode.system,
           initialRoute: AppPages.INITIAL,
           getPages: AppPages.routes,
+          builder: (context, child) => StreamChatCore(client: StreamChatCustom.StreamChat.clinet, child: child!),
+          
         ),
       ),
     );

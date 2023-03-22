@@ -5,7 +5,9 @@ import 'package:get/get_core/get_core.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:location/location.dart';
 import 'package:stream_chat/stream_chat.dart';
+import 'package:talky/model/user_model.dart';
 import 'package:talky/streamchat_option.dart';
+import 'package:talky/user_store.dart';
 import '../model/message.dart';
 import '../routes/name.dart';
 import '../util/index.dart';
@@ -80,7 +82,8 @@ class _LocationScreenState extends State<LocationScreen> {
           children: [
             ElevatedButton(
                 onPressed: (){
-                  print(StreamChat.clinet.state.isBlank);
+                  print(UserStore.to.profile.accessToken);
+
                 },
                 child: const Text('Check Location')),
             const SizedBox(height: 25),

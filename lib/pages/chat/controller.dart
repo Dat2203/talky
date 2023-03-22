@@ -6,13 +6,18 @@ import 'state.dart';
 
 class ChatController extends GetxController {
   final ChatState state = ChatState();
+  late final Channel channel ;
+
 
   @override
   void onInit() {
     super.onInit();
-  }
-  void setChannal(){
+    channel = Get.arguments;
   }
 
+  Future<void> _unreadCountHandler(int count) async {
+    if (count > 0) {
 
+    }
+  }
 }

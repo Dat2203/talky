@@ -24,13 +24,18 @@ class UserStore extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     token = StorageService.to.getString(STORAGE_USER_TOKEN_KEY);
     var profileOnline = StorageService.to.getString(STORAGE_USER_PROFILE_KEY);
-    var userGoogleLoginStorage = jsonDecode(profileOnline);
 
-    if (UserGoogleLogin != null) {
+    if (profileOnline != '') {
+      var userGoogleLoginStorage = jsonDecode(profileOnline);
+
+      _profile.value = UserGoogleLogin(
+          accessToken: userGoogleLoginStorage["accessToken"],
+          photoUrl: userGoogleLoginStorage["photoUrl"],
+          displayName: userGoogleLoginStorage["displayName"]);
+
       StreamChat.clinet.connectUser(
           streamchat.User(
             id: userGoogleLoginStorage["accessToken"],
@@ -46,8 +51,8 @@ class UserStore extends GetxController {
   Future<void> saveProfile(UserGoogleLogin userGoogleLogin) async {
     _isLogin.value = true;
     var value = jsonEncode(userGoogleLogin);
-    print(value);
     StorageService.to.setString(STORAGE_USER_PROFILE_KEY, value);
+    _profile.value = userGoogleLogin;
   }
 
   Future<void> setToken(String value) async {
