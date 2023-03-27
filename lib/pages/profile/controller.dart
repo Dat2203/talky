@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:talky/routes/name.dart';
+import 'package:talky/streamchat_option.dart';
 import 'package:talky/user_store.dart';
 
 import '../sign-in/controller.dart';
@@ -22,6 +23,7 @@ class ProfileController extends GetxController {
     try {
       await FirebaseAuth.instance.signOut();
       await googleSignIn.signOut();
+      StreamChat.clinet.disconnectUser(flushChatPersistence: true);
       await UserStore.to.logOut();
     } catch (e) {
       print(e.toString());

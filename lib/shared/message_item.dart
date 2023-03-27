@@ -29,7 +29,7 @@ class _MessageItemState extends State<MessageItem> {
     return GestureDetector(
       onLongPress: (){
         HapticFeedback.lightImpact();
-        print(widget.content);
+        _dialogBuilder(context  );
       },
       child: UnconstrainedBox(
         alignment: widget.isSender ? Alignment.centerRight : Alignment.centerLeft,
@@ -101,5 +101,22 @@ class _MessageItemState extends State<MessageItem> {
         bottomLeft: Radius.circular(5.h),
         bottomRight: Radius.circular(15.h),
         topRight: Radius.circular(15.h));
+  }
+
+  Future<void> _dialogBuilder(BuildContext context) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+
+        return AlertDialog(
+
+          content: Row(
+            children: [
+
+            ],
+          )
+        );
+      },
+    );
   }
 }

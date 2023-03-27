@@ -11,32 +11,37 @@ import '../../model/message.dart';
 import '../../shared/connection_status_builder.dart';
 import 'controller.dart';
 
-
 class ChatPage extends GetView<ChatController> {
-    Channel channel = Get.arguments;
+  Channel channel = Get.arguments;
 
-  _buildAppBar(){
+  _buildAppBar() {
     return AppBar(
       elevation: 0,
       automaticallyImplyLeading: false,
       toolbarHeight: 60.h,
       flexibleSpace: SafeArea(
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 3.h,),
+          padding: EdgeInsets.symmetric(
+            vertical: 3.h,
+          ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              IconButton(onPressed:(){
-                Get.back();
-              }, icon:  Icon(Icons.arrow_back_ios,color: Colors.purpleAccent,))
-              ,
+              IconButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.purpleAccent,
+                  )),
               Stack(
                 children: [
                   Positioned(
                       child: AvatarCircleCachedNetwork(
-                        photoUrl:  Utils.getChannelImage(channel),
-                        size: 15,
-                      )),
+                    photoUrl: Utils.getChannelImage(channel),
+                    size: 15,
+                  )),
                   Positioned(
                       bottom: 0,
                       right: 0,
@@ -50,46 +55,53 @@ class ChatPage extends GetView<ChatController> {
                       ))
                 ],
               ),
-              SizedBox(width: 10.w,),
+              SizedBox(
+                width: 10.w,
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(Utils.getChannelName(channel), style: Get.textTheme.bodyText1),
-                  SizedBox(height: 2.h,),
-                  BetterStreamBuilder(stream: controller.channel.state!.membersStream,
-                      initialData: channel.state!.members,
-                      builder: (context, data) {
-                    return ConnectionStatusBuilder(statusBuilder: ( context,  status) {
-                      print(status);
-                      switch (status) {
-                        case ConnectionStatus.connected:
-                          return Text("Ok");
-                        case ConnectionStatus.connecting:
-                          return const Text(
-                            'Connecting',
-                            style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.green,
-                            ),
-                          );
-                        case ConnectionStatus.disconnected:
-                          return const Text(
-                            'Offline',
-                            style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.red,
-                            ),
-                          );
-                        default:
-                          return const SizedBox.shrink();
-                      }
+                  Text(Utils.getChannelName(channel),
+                      style: Get.textTheme.bodyText1),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  BetterStreamBuilder(
+                    stream: controller.channel.state!.membersStream,
+                    initialData: channel.state!.members,
+                    builder: (context, data) {
+                      return ConnectionStatusBuilder(
+                        statusBuilder: (context, status) {
+                          print(status);
+                          switch (status) {
+                            case ConnectionStatus.connected:
+                              return Text("Ok");
+                            case ConnectionStatus.connecting:
+                              return const Text(
+                                'Connecting',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.green,
+                                ),
+                              );
+                            case ConnectionStatus.disconnected:
+                              return const Text(
+                                'Offline',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.red,
+                                ),
+                              );
+                            default:
+                              return const SizedBox.shrink();
+                          }
+                        },
+                      );
                     },
-                    );
-
-                      },)
+                  )
                 ],
               ),
             ],
@@ -97,119 +109,114 @@ class ChatPage extends GetView<ChatController> {
         ),
       ),
       actions: [
-        IconButton(onPressed: (){}, icon: Icon(Icons.phone,color: Colors.purpleAccent,)),
-        IconButton(onPressed: (){}, icon: Icon(Icons.video_camera_back_rounded,color: Colors.purpleAccent,))
+        IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.phone,
+              color: Colors.purpleAccent,
+            )),
+        IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.video_camera_back_rounded,
+              color: Colors.purpleAccent,
+            ))
       ],
-      actionsIconTheme: IconThemeData(
-          size: 25
-      ),
+      actionsIconTheme: IconThemeData(size: 25),
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
-
     return StreamChannel(
       channel: channel,
       child: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
-          appBar: _buildAppBar(),
+            appBar: _buildAppBar(),
             body: Stack(
               children: <Widget>[
                 Align(
-                    alignment: Alignment.topLeft,
-                        child: MessageListCore(
-                          loadingBuilder: (BuildContext context) {
-                            return const Center(child: CircularProgressIndicator());
-                          },
-                          emptyBuilder: (BuildContext context) {
-                            print("emty");
-                            return  const SizedBox.shrink();
-                          },
-                          messageListBuilder: (context , List<Message> messages ) {
-                            var  chunk = Utils.chunkList(messages);
-                            return  Container(
-                              padding: EdgeInsets.symmetric(horizontal: 5),
-                              child: ListView.builder(
-                                  reverse: true,
-                                  shrinkWrap: true,
-                                  itemCount: chunk.length,
-                                  itemBuilder: (context, index) =>ListMesssage(messages: chunk[index])),
-                            );
-
-                        },
-
-                          errorBuilder: (BuildContext context, Object error) {
-                            return Text("Error");
-                          },
-
-                        ),
-                      )
-                ,
-                Align(
-                  alignment: Alignment.bottomLeft,
-                  child: ActionBar()
+                  alignment: Alignment.topLeft,
+                 child: MessageListCore(
+                    loadingBuilder: (BuildContext context) {
+                      return Container();
+                    },
+                    emptyBuilder: (BuildContext context) {
+                      return const SizedBox.shrink();
+                    },
+                    messageListBuilder: (context, List<Message> messages) {
+                      var chunk = Utils.chunkList(messages);
+                      return Container(
+                        padding: EdgeInsets.symmetric(horizontal: 5),
+                        child: ListView.builder(
+                            reverse: true,
+                            shrinkWrap: true,
+                            itemCount: chunk.length,
+                            itemBuilder: (context, index) =>
+                                ListMesssage(messages: chunk[index])),
+                      );
+                    },
+                    errorBuilder: (BuildContext context, Object error) {
+                      return Text("Error");
+                    },
+                  ),
                 ),
+                Align(alignment: Alignment.bottomLeft, child: ActionBar()),
               ],
-            )
-        ),
+            )),
       ),
     );
   }
 
-    Widget _buildConnectedTitleState(
-        BuildContext context,
-        List<Member>? members,
-        ) {
-      Widget? alternativeWidget;
-      final channel = StreamChannel.of(context).channel;
-      final memberCount = channel.memberCount;
-      if (memberCount != null && memberCount > 2) {
-        var text = 'Members: $memberCount';
-        final watcherCount = channel.state?.watcherCount ?? 0;
-        if (watcherCount > 0) {
-          text = 'watchers $watcherCount';
-        }
-        alternativeWidget = Text(
-          text,
-        );
-      } else {
-        final userId = StreamChatCore.of(context).currentUser?.id;
-        final otherMember = members?.firstWhereOrNull(
-              (element) => element.userId != userId,
-        );
+  Widget _buildConnectedTitleState(
+    BuildContext context,
+    List<Member>? members,
+  ) {
+    Widget? alternativeWidget;
+    final channel = StreamChannel.of(context).channel;
+    final memberCount = channel.memberCount;
+    if (memberCount != null && memberCount > 2) {
+      var text = 'Members: $memberCount';
+      final watcherCount = channel.state?.watcherCount ?? 0;
+      if (watcherCount > 0) {
+        text = 'watchers $watcherCount';
+      }
+      alternativeWidget = Text(
+        text,
+      );
+    } else {
+      final userId = StreamChatCore.of(context).currentUser?.id;
+      final otherMember = members?.firstWhereOrNull(
+        (element) => element.userId != userId,
+      );
 
-        if (otherMember != null) {
-          if (otherMember.user?.online == true) {
-            alternativeWidget = const Text(
-              'Online',
-              style: TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.bold,
-                color: Colors.green,
-              ),
-            );
-          } else {
-            alternativeWidget = Text(
-              'Last online: '
-                  '${Jiffy(otherMember.user?.lastActive).fromNow()}',
-              style: const TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.bold,
-                color: Colors.red,
-              ),
-            );
-          }
+      if (otherMember != null) {
+        if (otherMember.user?.online == true) {
+          alternativeWidget = const Text(
+            'Online',
+            style: TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+              color: Colors.green,
+            ),
+          );
+        } else {
+          alternativeWidget = Text(
+            'Last online: '
+            '${Jiffy(otherMember.user?.lastActive).fromNow()}',
+            style: const TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+              color: Colors.red,
+            ),
+          );
         }
       }
-
-      return Container();
     }
 
-
-
+    return Container();
+  }
 }
 // class _MessageList extends StatelessWidget {
 //   const _MessageList({

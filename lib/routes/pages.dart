@@ -25,13 +25,12 @@ class AppPages {
   static List<String> history = [];
   static final List<GetPage> routes = [
     GetPage(
-      name: AppRoutes.INITIAL,
-      page: () => WellcomePage(),
-      binding: WellcomeBinding(),
-      curve: Curves.bounceIn,
-      transition: Transition.fade,
-      middlewares: [RouteWellComeMiddleWare(priority: 1)]
-    ),
+        name: AppRoutes.INITIAL,
+        page: () => WellcomePage(),
+        binding: WellcomeBinding(),
+        curve: Curves.bounceIn,
+        transition: Transition.fade,
+        middlewares: [RouteWellComeMiddleWare(priority: 1)]),
     GetPage(
         name: AppRoutes.SIGN_IN,
         page: () => SignInPage(),
@@ -53,6 +52,7 @@ class AppPages {
 
     GetPage(
         name: AppRoutes.CHATBOX,
+        transition: Transition.leftToRight,
         page: () => ChatPage(),
         binding: ChatBinding()),
     GetPage(
@@ -60,8 +60,6 @@ class AppPages {
         transition: Transition.leftToRight,
         page: () => ProfilePage(),
         binding: ProfileBinding()),
-
-
     // GetPage
   ];
 }

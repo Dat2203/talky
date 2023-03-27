@@ -64,6 +64,7 @@ dependencies:
   cached_network_image: ^3.2.3
   progress_indicators: ^1.0.0
   page_transition: ^2.0.9
+  stream_chat_persistence: ^5.1.0
 
 
 dev_dependencies:
