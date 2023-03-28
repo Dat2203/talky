@@ -2,8 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:talky/util/index.dart';
+
+final icons = [
+  'assets/images/svg/angry-1991061.svg',
+  'assets/images/svg/haha-1991060.svg',
+  'assets/images/svg/like-1991059.svg'
+];
 
 class MessageItem extends StatefulWidget {
   final bool isSender;
@@ -16,7 +24,8 @@ class MessageItem extends StatefulWidget {
       required this.isSender,
       required this.isFirst,
       required this.hasMidle,
-      this.isLast, required this.content})
+      this.isLast,
+      required this.content})
       : super(key: key);
 
   @override
@@ -24,17 +33,31 @@ class MessageItem extends StatefulWidget {
 }
 
 class _MessageItemState extends State<MessageItem> {
+  Offset _tapPosison = Offset(0, 0);
+  bool isPress = false;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onLongPress: (){
-        HapticFeedback.lightImpact();
-        _dialogBuilder(context  );
+      onTapDown: (positon){
+        _tapPosison = positon.globalPosition;
       },
+      onLongPress: () {
+        HapticFeedback.heavyImpact();
+        _dialogBuilder(context,Utils.convertOffset(_tapPosison, widget.isSender));
+      },
+      onSecondaryLongPress: (){
+        print("dads");
+      },
+      onLongPressEnd: (details){
+          print("ok");
+      },
+
       child: UnconstrainedBox(
-        alignment: widget.isSender ? Alignment.centerRight : Alignment.centerLeft,
+        alignment:
+            widget.isSender ? Alignment.centerRight : Alignment.centerLeft,
         child: Container(
-          constraints: BoxConstraints( maxWidth: 250.w),
+          constraints: BoxConstraints(maxWidth: 250.w),
           padding: EdgeInsets.symmetric(vertical: 7, horizontal: 10),
           margin: EdgeInsets.symmetric(vertical: 1),
           decoration: BoxDecoration(
@@ -70,14 +93,15 @@ class _MessageItemState extends State<MessageItem> {
           bottomLeft: Radius.circular(15.h),
           topRight: Radius.circular(15.h),
           bottomRight: Radius.circular(5.h));
-    }if(isFirst){
+    }
+    if (isFirst) {
       return BorderRadius.only(
           topLeft: Radius.circular(5.h),
           bottomLeft: Radius.circular(15.h),
           topRight: Radius.circular(15.h),
           bottomRight: Radius.circular(15.h));
     }
-    if(isLast){
+    if (isLast) {
       return BorderRadius.only(
           topLeft: Radius.circular(15.h),
           bottomLeft: Radius.circular(5.h),
@@ -87,14 +111,13 @@ class _MessageItemState extends State<MessageItem> {
     return _setMiddelborderRadius(isSender);
   }
 
-  BorderRadius _setMiddelborderRadius(bool isSender){
-    if(isSender){
-     return BorderRadius.only(
+  BorderRadius _setMiddelborderRadius(bool isSender) {
+    if (isSender) {
+      return BorderRadius.only(
           topLeft: Radius.circular(15.h),
           bottomLeft: Radius.circular(15.h),
           bottomRight: Radius.circular(5.h),
           topRight: Radius.circular(5.h));
-
     }
     return BorderRadius.only(
         topLeft: Radius.circular(5.h),
@@ -103,18 +126,47 @@ class _MessageItemState extends State<MessageItem> {
         topRight: Radius.circular(15.h));
   }
 
-  Future<void> _dialogBuilder(BuildContext context) {
-    return showDialog<void>(
+  void _dialogBuilder(BuildContext context, Alignment alignment) {
+    showGeneralDialog(
       context: context,
-      builder: (BuildContext context) {
+      barrierLabel: "Barrier",
+      barrierDismissible: true,
+      barrierColor: Colors.transparent,
+      transitionDuration: Duration(milliseconds: 100),
+      pageBuilder: (_, __, ___) {
+        return Align(
+          alignment:  alignment,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+            height: 50.h,
+            width: 200.w,
+            margin: EdgeInsets.symmetric(horizontal: 20),
+            decoration: BoxDecoration(
+                color: Colors.blueGrey, borderRadius: BorderRadius.circular(20)),
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 4,
+                itemBuilder: (context, index) => SvgPicture.asset('assets/images/care-1991058.svg',width:40.w),),
+            // child: Row(
+            //   children: icons.map((item)=> SvgPicture.asset("assets/images/icons8-apple-logo.svg",width: 20.w)).toList(),
+            // ),
+          ),
+        );
+      },
+      transitionBuilder: (_, anim, __, child) {
+        Tween<Offset> tween;
+        if (anim.status == AnimationStatus.reverse) {
+          tween = Tween(begin: Offset(0, 20), end: Offset.zero);
+        } else {
+          tween = Tween(begin: Offset(0, 30), end: Offset.zero);
+        }
 
-        return AlertDialog(
-
-          content: Row(
-            children: [
-
-            ],
-          )
+        return SlideTransition(
+          position: tween.animate(anim),
+          child: FadeTransition(
+            opacity: anim,
+            child: child,
+          ),
         );
       },
     );

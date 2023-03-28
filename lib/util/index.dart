@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:stream_chat/stream_chat.dart';
 import 'package:talky/model/message.dart';
 import 'package:talky/model/user_model.dart';
@@ -65,6 +66,17 @@ class Utils {
       }
     }
     return null;
+  }
+
+  static Alignment convertOffset( Offset offset, bool isSendMessage){
+    double widthScreen = MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.width;
+    double heightScreen  = MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.height;
+
+    double alignmentY = (offset.dy - heightScreen/2)/(heightScreen/2);
+
+    return Alignment( isSendMessage ? 1 : -1, alignmentY-0.15);
+
+
   }
 }
 
